@@ -9,7 +9,6 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class CreatePrompt extends Component
 {
-
     #[Required]
     public ?string $title = null;
 
@@ -19,12 +18,13 @@ class CreatePrompt extends Component
     public ?string $description = null;
 
     public ?string $response_type = null;
+
     public ?string $response_schema = null;
 
-
     #[Computed]
-    public function isValid(): bool {
-        if (!empty($this->prompt) && !empty($this->title)) {
+    public function isValid(): bool
+    {
+        if (! empty($this->prompt) && ! empty($this->title)) {
             return true;
         }
 
@@ -47,7 +47,6 @@ class CreatePrompt extends Component
         $this->redirect(route('show-prompt', ['prompt' => $prompt]));
 
     }
-
 
     public function render()
     {

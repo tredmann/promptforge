@@ -21,7 +21,7 @@ class PromptFactory extends Factory
             'description' => $this->faker->paragraph(),
             'prompt' => 'Tell me a joke',
             'response_type' => null,
-            'response_schema' => null
+            'response_schema' => null,
         ];
     }
 }

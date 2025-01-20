@@ -1,6 +1,6 @@
 <?php
 
-use App\Views\Prompts\CreatePrompt ;
+use App\Views\Prompts\CreatePrompt;
 use App\Views\Prompts\ListPrompts;
 use App\Views\Prompts\ShowPrompt;
 use Illuminate\Support\Facades\Route;
@@ -18,10 +18,9 @@ Route::group(['prefix' => 'prompt'], function () {
     });
 });
 
-
 Route::group(['prefix' => 'fe'], function () {
 
-    Route::get('/{request}', function() {
+    Route::get('/{request}', function () {
         return 'ypo';
-    } )->name('show-frontend-request');
+    })->name('show-frontend-request');
 });

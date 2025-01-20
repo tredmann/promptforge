@@ -2,17 +2,21 @@
 
 namespace App\Views;
 
+use App\Jobs\ChatRequest;
 use App\Models\Prompt;
+use App\Models\Request;
 use Livewire\Component;
 
 class RequestPanel extends Component
 {
-
     public Prompt $prompt;
+
     public ?string $provider = null;
+
     public ?string $model = null;
 
-    public function add(): void {
+    public function add(): void
+    {
         $data = [
             'provider' => $this->provider,
             'model' => $this->model,
@@ -24,6 +28,11 @@ class RequestPanel extends Component
 
         $this->reset('model', 'provider');
 
+    }
+
+    public function dispatchJob(string $requestId): void
+    {
+        ChatRequest::dispatch(Request::find($requestId));
     }
 
     public function render()

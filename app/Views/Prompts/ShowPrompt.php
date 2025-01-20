@@ -18,6 +18,6 @@ class ShowPrompt extends Component
     {
         return view('components.prompts.show-prompt')
             ->extends('components.layouts.app')
-            ->title($this->prompt->title);;
+            ->title($this->prompt->title);
     }
 }

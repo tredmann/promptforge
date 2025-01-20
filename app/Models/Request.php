@@ -9,22 +9,22 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Request extends Model
 {
-
     use HasFactory, HasUlid;
 
     protected $fillable = [
         'provider',
         'model',
         'has_api',
-        'has_frontend'
+        'has_frontend',
     ];
 
     protected $casts = [
         'has_api' => 'boolean',
-        'has_frontend' => 'boolean'
+        'has_frontend' => 'boolean',
     ];
 
-    public function prompt(): BelongsTo {
+    public function prompt(): BelongsTo
+    {
         return $this->belongsTo(Prompt::class);
     }
 }

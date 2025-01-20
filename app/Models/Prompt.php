@@ -9,20 +9,19 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Prompt extends Model
 {
-    use HasUlid;
     use HasFactory;
+    use HasUlid;
 
     protected $fillable = [
         'title',
         'description',
         'prompt',
         'response_type',
-        'response_schema'
+        'response_schema',
     ];
 
     public function requests(): HasMany
     {
         return $this->hasMany(Request::class);
     }
-
 }

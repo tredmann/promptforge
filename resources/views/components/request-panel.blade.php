@@ -22,7 +22,7 @@
                             <td>
                                 <a target="_blank" href="{{ route('show-frontend-request', ['request' => $request]) }}">Open</a>
                             </td>
-                            <td>0</td>
+                            <td>0 | <a wire:click="dispatchJob('{{$request->id}}')">Start</a></td>
                         </tr>
                   @endforeach
 
