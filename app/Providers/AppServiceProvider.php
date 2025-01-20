@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Jobs\ChatRequest;
 use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Queue\Events\JobProcessed;
 use Illuminate\Queue\Events\JobProcessing;
@@ -25,8 +26,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Queue::before(function (JobProcessing $event) {
-            Log::debug($event->job->resolveName());
-            Log::debug('-->');
+
+            if ($event->job->resolveName() === ChatRequest::class) {
+                Log::info('We have a chat request');
+            }
         });
 
         Queue::after(function (JobProcessed $event) {
