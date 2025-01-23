@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property string $title
+ * @property ?string $description
+ * @property string $prompt
+ * @property ?string $response_type
+ * @property ?string $response_schema
+ */
 class Prompt extends Model
 {
     use HasFactory;

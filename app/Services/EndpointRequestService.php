@@ -38,6 +38,6 @@ class EndpointRequestService
 
     public function extractInputs(string $text): array
     {
-        return Str::matchAll('/\[([^\]]+)\]/', $text)->toArray();
+        return Str::matchAll('/\[([a-zA-Z][^\]]*[a-zA-Z])\]/', $text)->toArray();
     }
 }
