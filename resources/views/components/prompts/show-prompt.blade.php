@@ -35,10 +35,23 @@
 
     <div class="uk-margin-large-top">
         <div class="uk-flex uk-flex-between">
-            <h2 class="uk-h3">Requests</h2>
+            <h2 class="uk-h3">Endpoints</h2>
+
         </div>
-        <livewire:request-panel :prompt="$prompt"/>
+        <livewire:endpoint-panel :prompt="$prompt"/>
     </div>
+
+{{--    <div class="uk-margin-large-top">--}}
+{{--        <div class="uk-flex uk-flex-between">--}}
+{{--            <h2 class="uk-h3">Requests</h2>--}}
+{{--            <div>--}}
+{{--                <a class="uk-button uk-button-primary" href="{{route('create-prompt-request', ['prompt' => $prompt])}}">Add</a>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--        <livewire:request-panel :prompt="$prompt"/>--}}
+{{--    </div>--}}
+
+
 </div>
 
 

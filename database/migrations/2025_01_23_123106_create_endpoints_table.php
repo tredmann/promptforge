@@ -6,21 +6,27 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('requests', function (Blueprint $table) {
-            $table->ulid('id')->primary();
-            $table->foreignId('prompt_id')->constrained('prompts');
+        Schema::create('endpoints', function (Blueprint $table) {
+            $table->ulid('id');
+            $table->foreignUlid('prompt_id')->constrained('prompts');
+            $table->string('name');
             $table->string('provider');
             $table->string('model');
-            $table->boolean('has_api')->default(false);
-            $table->boolean('has_frontend')->default(false);
+            $table->float('temperature');
             $table->timestamps();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::dropIfExists('requests');
+        Schema::dropIfExists('endpoints');
     }
 };

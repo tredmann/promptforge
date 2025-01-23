@@ -4,11 +4,11 @@
         <table class="uk-table uk-table-small uk-table-divider">
             <thead>
                 <tr>
+                    <th>State</th>
                     <th>Provider</th>
                     <th>Model</th>
-                    <th>API</th>
-                    <th>Frontend</th>
-                    <th>Usages</th>
+                    <th>Temperature</th>
+                    <th>Time</th>
                 </tr>
             </thead>
 
@@ -16,13 +16,24 @@
 
                     @foreach($prompt->requests as $request)
                         <tr>
+                            <td>
+                                @if($request->state === \App\Enums\RequestState::Succeeded)
+                                    <span class="uk-label uk-label-success">{{ $request->state->value }}</span>
+                                @elseif($request->state === \App\Enums\RequestState::Pending || $request->state === \App\Enums\RequestState::Queued)
+                                    <span class="uk-label uk-label-warning">{{ $request->state->value }}</span>
+                                @else
+                                    <span class="uk-label uk-label-danger">{{ $request->state->value }}</span>
+                                @endif
+
+                            </td>
                             <td>{{ $request->provider }}</td>
                             <td>{{ $request->model }}</td>
-                            <td><input class="uk-checkbox" type="checkbox"/></td>
-                            <td>
-                                <a target="_blank" href="{{ route('show-frontend-request', ['request' => $request]) }}">Open</a>
+                            <td>{{ $request->temperature }}</td>
+                            <td><a href="{{route('show-prompt-request', ['request' => $request, 'prompt' => $prompt])}}">{{ $request->started_at->format('d.m.Y H:i:s') }}
+                            @if($request->state === \App\Enums\RequestState::Failed || $request->state === \App\Enums\RequestState::Succeeded)
+                                - {{ $request->started_at->diffInSeconds($request->finished_at) }} sec
+                                    @endif</a>
                             </td>
-                            <td>0 | <a wire:click="dispatchJob('{{$request->id}}')">Start</a></td>
                         </tr>
                   @endforeach
 
@@ -33,16 +44,4 @@
 
     @endif
 
-
-    <form class="uk-form uk-form-stacked uk-margin-large-top" wire:submit="add">
-        <div class="uk-width-1-3@s">
-            <x-forms.textinput name="provider" label="Provider" required="true" wire:model.live="provider"/>
-        </div>
-        <div class="uk-width-1-3@s">
-            <x-forms.textinput name="model" label="Model" required="true" wire:model.live="model"/>
-        </div>
-        <div class="uk-width-1-3@s">
-            <button class="uk-button uk-button-primary">Add</button>
-        </div>
-    </form>
 </div>

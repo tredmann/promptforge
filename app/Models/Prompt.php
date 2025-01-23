@@ -24,4 +24,9 @@ class Prompt extends Model
     {
         return $this->hasMany(Request::class);
     }
+
+    public function endpoints(): HasMany
+    {
+        return $this->hasMany(Endpoint::class);
+    }
 }

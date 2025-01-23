@@ -2,9 +2,9 @@
 
 namespace App\Views;
 
+use App\Enums\RequestState;
 use App\Jobs\ChatRequest;
 use App\Models\Prompt;
-use App\Models\Request;
 use Livewire\Component;
 
 class RequestPanel extends Component
@@ -15,24 +15,27 @@ class RequestPanel extends Component
 
     public ?string $model = null;
 
-    public function add(): void
+    public ?float $temperature = .5;
+
+    public function submitRequest(): void
     {
         $data = [
+            'state' => RequestState::Queued,
             'provider' => $this->provider,
             'model' => $this->model,
-            'has_frontend' => true,
-            'has_api' => true,
+            'temperature' => $this->temperature,
+            'prompt_text' => $this->prompt->prompt, // substitutions
+            'response_type' => $this->prompt->response_type,
+            'response_schema' => $this->prompt->response_schema,
+            'started_at' => now(),
         ];
 
         $request = $this->prompt->requests()->create($data);
 
-        $this->reset('model', 'provider');
+        ChatRequest::dispatch($request);
 
-    }
+        $this->reset('model', 'provider', 'temperature');
 
-    public function dispatchJob(string $requestId): void
-    {
-        ChatRequest::dispatch(Request::find($requestId));
     }
 
     public function render()
