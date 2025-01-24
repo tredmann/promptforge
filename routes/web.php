@@ -1,5 +1,6 @@
 <?php
 
+use App\Views\FrontendEndpoint;
 use App\Views\Prompts\CreatePrompt;
 use App\Views\Prompts\CreateRequest;
 use App\Views\Prompts\ListPrompts;
@@ -30,7 +31,5 @@ Route::group(['prefix' => 'prompt'], function () {
 
 Route::group(['prefix' => 'fe'], function () {
 
-    Route::get('/{request}', function () {
-        return 'ypo';
-    })->name('show-frontend-request');
+    Route::get('/{endpoint}', FrontendEndpoint::class)->name('show-frontend-endpoint');
 });

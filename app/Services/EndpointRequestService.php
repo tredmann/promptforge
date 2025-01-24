@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Endpoint;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use LLM\Enums\Type;
 use LLM\LLM;
@@ -21,6 +22,8 @@ class EndpointRequestService
         }
 
         // better way
+
+        Log::debug($promptText);
 
         $type = Type::Ollama;
         $llm = LLM::make($type);

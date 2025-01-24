@@ -10,7 +10,7 @@
 
     @vite('resources/scss/main.scss')
 </head>
-<body>
+<body >
 <div class="uk-container uk-margin-medium-top">
     @yield('breadcrumb')
 </div>

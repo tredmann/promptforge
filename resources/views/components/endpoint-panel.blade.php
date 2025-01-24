@@ -21,7 +21,7 @@
                     <td>{{$endpoint->provider}}</td>
                     <td>{{$endpoint->model}}</td>
                     <td>{{$endpoint->temperature}}</td>
-                    <td>Frontend</td>
+                    <td><a href="{{route('show-frontend-endpoint', ['endpoint' => $endpoint])}}">Frontend</a></td>
                     <td><a href="{{route('api-endpoint', ['endpoint' => $endpoint])}}">API</a></td>
                 </tr>
                 @endforeach

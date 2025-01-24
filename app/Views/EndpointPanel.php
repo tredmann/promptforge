@@ -6,6 +6,8 @@ use App\Models\Prompt;
 use App\Services\CreateEndpointService;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
+use LLM\Enums\Type;
+use LLM\LLM;
 
 class EndpointPanel extends Component
 {
@@ -61,10 +63,6 @@ class EndpointPanel extends Component
     #[Computed]
     public function models(): array
     {
-        return [
-            'phi4:latest',
-            'gemma2:latest',
-            'codestral:latest',
-        ];
+        return LLM::make(Type::Ollama)->models();
     }
 }
